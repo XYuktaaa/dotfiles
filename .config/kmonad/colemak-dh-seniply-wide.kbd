@@ -1,0 +1,211 @@
+(defcfg
+  ;; ** For Linux **
+  ;;input  (device-file "/dev/input/by-id/usb-Dell_Dell_USB_Keyboard-event-kbd")
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "KMonad seniply-iso-wide")
+  cmp-seq cmp
+
+  fallthrough true
+)
+
+(defsrc
+  esc      f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+  grv      1     2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab      q     w     e     r     t     y     u     i     o     p     [     ]     \     
+  caps     a     s     d     f     g     h     j     k     l     ;     '     ret
+  lsft        z     x     c     v     b     n     m     ,     .     /     rsft
+  lctl        lmet  lalt              spc               ralt  rctl
+)
+
+(defalias 
+  l_qw (layer-switch qwerty-sp)
+  l_dh (layer-switch colemak-dh-sp)
+)
+
+(defalias
+  ext  (layer-toggle extend) ;; Bind 'ext' to the Extend Layer
+  fun  (layer-toggle function) ;; Bind 'fun' to the Function Layer
+  sym (layer-toggle symbols) ;; Bind 'sym' to Symbols Layer
+  num (layer-toggle numbers) ;; Bind 'num' to Numbers Layer
+  ;;cnt (around rctl (layer-toggle control))
+  ;;shit (around spc (layer-toggle space))
+)
+
+(defalias 
+  ls_s (sticky-key 300 lsft)
+  lc_s (sticky-key 300 lctl)
+  la_s (sticky-key 300 lalt)
+  ra_s (sticky-key 300 ralt)
+  lm_s (sticky-key 300 lmet)
+  lsc_s (around @lc_s @ls_s)
+  lac_s (around @lc_s @la_s)
+  S-spc (around lsft spc)
+  ;;cnt (layer-toggle control)
+  cnt (around (layer-toggle control) rctl)
+  shit (around @ls_s (layer-toggle space))
+  ;;shit (around (layer-toggle space) @ls_s)
+)
+
+(defalias
+  cpy C-c
+  pst C-v
+  cut C-x
+  scpy C-S-c
+  spst C-S-v
+  scut C-S-x
+  udo C-z
+  all C-a
+  fnd C-f
+  bk A-left
+  fw A-right
+  v+ VolumeUp
+  v- VolumeDown 
+  v0 Mute
+  mpl play
+  mps previoussong
+  mns nextsong
+  mrw rewind
+  mpp pause
+  mst stop
+  b+ BrightnessUp
+  b- BrightnessDown
+  ra1 (around ralt 1)
+  ra2 (around ralt 2)
+  ra3 (around ralt 3)
+  ra4 (around ralt 4)
+  ra5 (around ralt 5)
+  ra6 (around ralt 6)
+  ra7 (around ralt 7)
+  ra8 (around ralt 8)
+  ra9 (around ralt 9)
+  ra0 (around ralt 0)
+  f13 KeyF13
+  f14 KeyF14
+  f15 KeyF15
+  f16 KeyF16
+  f17 KeyF17
+  f18 KeyF18
+  f19 KeyF19
+  f20 KeyF20
+  f21 KeyF21
+  f22 KeyF22
+  f23 KeyF23
+  f24 KeyF24
+
+;;  tnha (tap-next a lalt)
+;;  tnhr (tap-next r lmeta)
+;;  tnhs (tap-next s lsft)
+;;  tnht (tap-next t lctl)
+;;  tnhh (tap-next-release h lalt)
+;;  tnh, (tap-next-release , lmeta)
+;;  tnh. (tap-next-release . lsft)
+;;  tnhx (tap-next ret @ext)
+;;  rctlj (tap-next - rctl)
+;;  symret (tap-next esc @sym)
+;;  ;;tnhx (tap-next-release A-j @ext)
+;;  tent (tap-next-release ret @ls_s)
+)
+
+(deflayer colemak-dh-sp
+  esc      f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+  grv      1     2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab      q     w     f     p     b     [     j     l     u     y     '     \     ;
+  @num     a     r     s     t     g     ]     m     n     e     i     o     esc
+  z     x     c     d     v     '     /     k     h     ,     .     @cnt
+  lctl        lalt  @ext              @shit              spc   @sym
+  ;;lctl        lalt  @ext              @ls_s              spc   @sym
+)
+
+;;(deflayer colemak-dh-sp
+;;  esc      f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+;;  grv      1     2     3     4     5     6     7     8     9     0     -     =     bspc
+;;  tab      q     w     f     p     b     [     j     l     u     y     '     \     ;
+;;;;  @num     @tnha @tnhr @tnhs @tnht  g     ]     m     n     e     i     o     ret
+;;  @num     a     r     s     t     g     ]     m     n     e     i     o     esc
+;;;;  z     x     c     d     v     z     /     k     @tnhh @tnh, @tnh. rctl
+;;  z     x     c     d     v     /     /     k     h     ,     .     @cnt
+;;;;  lctl        lalt  @ext              @ls_s              spc   @symret
+;;  lctl        lalt  @ext              @ls_s              spc   @sym
+;;)
+
+;;(deflayer colemak-dh-sp
+;;  esc      f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+;;  grv      1     2     3     4     5     6     7     8     9     0     -     =     bspc
+;;  tab      q     w     f     p     b     [     j     l     u     y     '     \     ;
+;;  @num     a     r     s     t     g     ]     m     n     e     i     o     ret
+;;  z     x     c     d     v     z     /     k     h     ,     .     rctl
+;;  lctl        lalt  @ext              @ls_s              spc   @sym
+;;)
+
+(deflayer qwerty-sp
+  _        _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  @num     _     _     _     _     _     _     _     _     _     _     _     _ 
+  _    _     _     _     _     _     _     _     _     _     _     _
+  _           lalt  @ext              _                 @sym  _
+)
+
+
+(deflayer extend
+  _        @mpl  @mrw  @mps  @mns ejectcd refresh brdn brup www mail   prog1 prog2
+  A-`        f1    f2    f3    f4    f5    f6    f7    f8    f9   f10    f11   f12   _
+  A-=        @bk   @fw   A-f A-p A-b   ssrq  pgup  home  up    end   caps  cmp   menu
+  A-]        @la_s @lm_s @ls_s @lc_s C-A-g slck  pgdn  lft   down  rght  del  _
+  @udo  @cut  @cpy  C-d  @pst  @udo  _     ret   bks   tab    cmp  ssrq
+  _            _    _                 @num               ret   @fun  
+)
+
+(deflayer function
+  _        _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        @mst  @mps  @mpp  @mns  @b-   _     f12   f7    f8    f9    slck  @f21  @f24
+  _        @la_s @lm_s @ls_s @lc_s @b+   _     f11   f4    f5    f6    @l_dh _
+  @v0   @v-   @scpy @v+   @spst _     _     f10   f1    f2    f3    _
+  _           _     _                 _                 _     _
+)
+
+(deflayer symbols
+  _        @f13  @f14  @f15  @f16  @f17  @f18  @f19  @f20  @f21  @f22  @f23  @f24
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        S-1   S-2   S-3   S-4   S-5   «     =     `     :     ;     +     @f22  @f23
+  =        @la_s @lm_s @ls_s @lc_s S-6   »     *     \(    \)    {     }     =
+  +   - \\   S-\\  S-7   nubs  +     ~     [     ]   <     > 
+  _           ?     /                  -              _     _
+)
+
+(deflayer numbers
+  _        _     _     _     _     _     _     _     _     _     _     _     _
+  _          _     _     _     _     _     _     _     _     _     _     _     _     _
+  _    C-A-q C-A-w C-A-f C-A-p C-A-b  _     =     7     8     9     =     _     _
+  _        @la_s @lm_s @ls_s @lc_s @ra_s _     *     4     5     6     \_     _
+  _        cmp   tab   bks   ret   =     /     0     1     2     3     _
+  _           _     _                 _                 A-spc     _
+)
+
+(deflayer control
+  _        _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     C-A-u _     _     _     _
+  _        _     _     _     _     _     _     _     C-A-n C-A-e C-A-i C-A-o _ 
+  _    _      _     _     _     _     C-A-g     C-A-k C-A-h A-, A-.     _
+  _          _    _                   _                 C-A-!     C-A-@
+)
+
+(deflayer space
+  _        _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _ 
+  _    _      _     _     _     _     _     _     _     _     _     _
+  _          _    _                   _                 ?     \_
+)
+
+(deflayer empty
+  _        _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _     _
+  _        _     _     _     _     _     _     _     _     _     _     _     _ 
+  _    _      _     _     _     _     _     _     _     _     _     _
+  _          _    _                   _                 _     _
+)

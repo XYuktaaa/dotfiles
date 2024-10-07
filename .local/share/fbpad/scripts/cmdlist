@@ -1,0 +1,9 @@
+hx $(zoxide query --interactive)
+w3l $(eval $(cat /home/Piriyan/.local/share/fbpad/scripts/w3l_paths | fzf --jump-labels="bd" --bind load:jump,jump:accept,esc:abort) | fzf --sync --jump-labels="arstneioqwfpluy" --bind load:jump,jump:accept,esc:abort)
+fzf --walker-root=/home/Piriyan/documents --bind 'enter:become(/home/Piriyan/.local/bin/fbpdf {})'
+gitui -d $(zoxide query --interactive)
+htop
+upower -d
+doas ps_mem.py
+cmus
+apropos '' | fzf --bind 'enter:become(clear; man $(echo {} | cut -f 1 -d " "))'; clear

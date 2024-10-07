@@ -1,0 +1,63 @@
+#!/bin/sh
+HISTFILE="$ZDOTDIR"/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
+echo $PATH | grep -Eq "(^|:)/sbin(:|)"     || PATH=$PATH:/sbin
+echo $PATH | grep -Eq "(^|:)/usr/sbin(:|)" || PATH=$PATH:/usr/sbin
+
+# export GOPATH=$HOME/.local/share/go
+
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/share/yabridge
+export PATH=$PATH:/usr/lib/llvm-16/bin
+# export PATH=$PATH:$HOME/.local/share/go/bin
+# export PATH=$PATH:/opt/gradle/gradle-8.7/bin
+# export ANDROID_HOME=$HOME/android/android_sdk
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+# export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+# export PATH=$PATH:$HOME/.local/bin/flutter/bin
+# export PATH=$PATH:$HOME/.dotnet/tools
+
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export EDITOR=/usr/local/bin/hx
+export VISUAL=/usr/local/bin/hx
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESSCOLOR=always
+export LESS=' -R --jump-target=".5"'
+export _ZO_EXCLUDE_DIRS="/media/*"
+
+# export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+# export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+# export _ZO_FZF_OPTS="--exact --preview-window=wrap --no-sort --layout=reverse --cycle --no-mouse --keep-right --border=rounded --height=30% --info=inline --tabstop=1 --exit-0 --preview='\command -p ls -Cpi --color=always --group-directories-first {2..}'"
+# export _ZO_FZF_OPTS="--layout=reverse --info=inline --no-mouse --border=sharp  --height 20% --preview-window=right:50% --cycle --preview='ls {}'"
+# export FZF_DEFAULT_OPTS="-e --layout=reverse --info=inline --no-mouse --border=rounded --height=30% --preview-window=right:30% --cycle --scheme=path"
+# export FZF_COMMON_OPTIONS="-e --layout=reverse --info=inline --no-mouse --border=rounded --height=30% --preview-window 'right:30%' --cycle --scheme=path"
+export FZF_DEFAULT_OPTS="--layout=reverse --bind ',:jump' --no-mouse --color=border:#808080,spinner:#E6DB74,hl:#7E8E91,fg:#F8F8F2,header:#7E8E91,info:#A6E22E,pointer:#A6E22E,marker:#F92672,fg+:#F8F8F2,prompt:#F92672,hl+:#F92672"
+
+export LESS_TERMCAP_md=$(tput bold; tput setaf 4)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_mb=$(tput blink)
+export LESS_TERMCAP_us=$(tput setaf 2)
+export LESS_TERMCAP_ue=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput smso)
+export LESS_TERMCAP_se=$(tput rmso)
+
+export LESS="--RAW-CONTROL-CHARS"
+# export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+# export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+# export LESS_TERMCAP_me=$(tput sgr0)
+# export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
+# export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+# export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
+# export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+# export LESS_TERMCAP_mr=$(tput rev)
+# export LESS_TERMCAP_mh=$(tput dim)
+# export LESS_TERMCAP_ZN=$(tput ssubm)
+# export LESS_TERMCAP_ZV=$(tput rsubm)
+# export LESS_TERMCAP_ZO=$(tput ssupm)
+# export LESS_TERMCAP_ZW=$(tput rsupm)
+# export GROFF_NO_SGR=1         # For Konsole and Gnome-terminal
+
+export PAGER="${commands[less]:-$PAGER}"

@@ -1,0 +1,7 @@
+#!/bin/sh
+PWD=$HOME/.local/share/fbpad/scripts/
+export PATH=$HOME/.local/bin:$PATH
+export _ZO_FZF_OPTS="$_ZO_FZF_OPTS --layout=reverse --info=inline --no-mouse --height=100% --cycle"
+cmd=$(cat $PWD/cmdlist | fzf --jump-labels="xwpgtumcarz" --exact --layout=reverse  --no-mouse --print-query --bind load:jump,jump:accept,esc:abort --border=rounded | tail -1)
+clear
+sh -c "$cmd"

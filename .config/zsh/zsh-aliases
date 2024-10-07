@@ -1,0 +1,58 @@
+#!/bin/sh
+alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
+
+alias ls='ls --color=auto'
+alias l='less --LINE-NUMBERS'
+alias la='ls --color=auto -A'
+alias ll='ls --color=auto -lh'
+
+
+# Colorize grep output (good for log files)
+alias grep='grep --color=auto'
+# alias egrep='egrep --color=auto'
+# alias fgrep='fgrep --color=auto'
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+# easier to read disk
+alias df='df -h'                          # human-readable sizes
+alias du='du -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+# alias pp='doas ps_mem.py'
+
+alias ai='doas apt install'
+alias arm='doas apt remove'
+alias as='apt show'
+alias ap='apt policy'
+alias af='apt-file'
+alias afs='apt-file show'
+alias aff='apt-file find'
+
+alias grc='gh repo clone'
+
+alias fman='compgen -c | fzf | xargs man'
+alias duk='w3m duckduckgo.com'
+alias se='sudoedit'
+alias sx='doas hx'
+alias qb='QT_QPA_PLATFORM=linuxfb qutebrowser & echo $! > /tmp/qutePID'
+alias qq='QT_QPA_PLATFORM=linuxfb 1>/dev/null 2&>1 qutebrowser & echo $! > /tmp/qutePID'
+alias sway='2>/dev/null 1>&2 sway' 
+alias sch='doas chmod +x'
+alias lf='TERM=ansi lf'
+alias lazygit='TERM=ansi lazygit'
+alias d='doas'
+alias ish='iwctl station wlan0 show'
+alias iss='iwctl station wlan0 scan'
+alias suk='doas sv up kmonad'
+alias sdk='doas sv down kmonad'
+
+alias usv='doas env SVDIR=/home/Piriyan/.service sv'
+alias sv='doas sv'
+
+alias yt='ytfzf -T chafa --async-thumbnails -l --thumbnail-quality=medium -t'
+alias x='hx $(zoxide query --interactive)'
+alias dotfiles='/bin/git --git-dir=$HOME/development/loose/dotfiles/ --work-tree=$HOME'

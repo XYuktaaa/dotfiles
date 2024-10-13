@@ -1,0 +1,3 @@
+#!/bin/sh
+# sv start kmonad || exit 1
+exec env XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /home/Piriyan/.local/bin/global-keybinds /dev/input/event11
